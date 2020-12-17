@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_change_credit" model="ir.ui.view">
+        <field name="name">Extended Lead</field>
+        <field name="model">crm.lead</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="crm.view_create_opportunity_simplified"/>
+        <field name="arch" type="xml">
+            <div class="o_row" position="after">
+                  <field name="expiration_date"/>
+                  <field name="additional_info"/>
+            </div>
+        </field>
+    </record>
+
+    <record id="view_partner_change_credit2" model="ir.ui.view">
+        <field name="name">Extended Lead</field>
+        <field name="model">crm.lead</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/group/group[4]" position="after">
+                <group>
+                  <field name="additional_info"/>
+                </group>
+                <group>
+                  <field name="expiration_date"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
