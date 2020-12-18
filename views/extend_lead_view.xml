@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_partner_change_credit" model="ir.ui.view">
+    <record id="view_create_opportunity_simplified_extended" model="ir.ui.view">
         <field name="name">Extended Lead</field>
         <field name="model">crm.lead</field>
         <field name="type">form</field>
@@ -9,11 +9,12 @@
             <div class="o_row" position="after">
                   <field name="expiration_date"/>
                   <field name="additional_info"/>
+                  <field name="marketing_consent"/>
             </div>
         </field>
     </record>
 
-    <record id="view_partner_change_credit2" model="ir.ui.view">
+    <record id="crm_case_form_view_oppor_extended" model="ir.ui.view">
         <field name="name">Extended Lead</field>
         <field name="model">crm.lead</field>
         <field name="type">form</field>
@@ -22,11 +23,35 @@
             <xpath expr="/form/sheet/group/group[4]" position="after">
                 <group>
                   <field name="additional_info"/>
+                    <field name="marketing_consent"/>
                 </group>
                 <group>
+                  <field name="difficulty"/>
                   <field name="expiration_date"/>
                 </group>
+                <group>
+                  <field name="obstacles">
+                    <tree string="Obstacles">
+                        <field name="description"/>
+                        <field name="difficulty"/>
+                    </tree>
+                  </field>
+                </group>
             </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_tree_view_oppor_extended" model="ir.ui.view">
+        <field name="name">Extended Lead</field>
+        <field name="model">crm.lead</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <field name="probability" position="after">
+                <field name="marketing_consent"/>
+                <field name="difficulty"/>
+                <field name="expiration_date"/>
+            </field>
         </field>
     </record>
 </odoo>
