@@ -2,13 +2,13 @@
 Module extending crm_lead model in CRM App by additional fields and new related model - extend_lead.obstacle.
 
 ### New fields in crm.lead:
-* `expiration_date` - date field,
+* `expiration_date` - date field (created constrain to not allow for past dates),
 * `additional_info` - text field,
 * `marketing_consent` - boolean field,
-* `obstacles` - One2many relation - list of related obstacles,
+* `obstacles` - One2many relation - list of related obstacles (displayed as a table, js for ListView has been overridden to show only one empty row),
 * `difficulty` - integer - dynamically calculated from obstacles,
 * `image` - binary field - used as an icon in kanban view,
-* `image_small` - binary field - contains above image in low resolution.
+* `image_small` - binary field - dynamically created image in low resolution.
 
 <br/>
 
