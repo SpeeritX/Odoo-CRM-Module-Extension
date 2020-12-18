@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models, api
+from odoo import fields, models, api, tools
 from odoo.exceptions import ValidationError
 from datetime import datetime
 import time
@@ -22,12 +22,33 @@ class ExtendedLead(models.Model):
     obstacles = fields.One2many('extend_lead.obstacle', 'lead_id', string="Obstacles")
     difficulty = fields.Integer(compute="_calculate_difficulty", store=True, index=True, string='Difficulty')
     image = fields.Binary('Image')
+    image_small = fields.Binary('Small Image', compute="_compute_image", store=True)
 
-
+    @api.multi
     @api.depends('obstacles')
     def _calculate_difficulty(self):
-        self.difficulty = sum(o.difficulty for o in self.obstacles)
+        for r in self:
+            r.difficulty = sum(o.difficulty for o in r.obstacles)
 
+    @api.model
+    def create(self,values):
+        if 'image' in values:
+            values['image'] = tools.image_resize_image_medium(values['image'])
+            return super(ExtendedLead, self).create(values)
+
+    @api.multi
+    def write(self, values):
+        if 'image' in values:
+            values['image'] = tools.image_resize_image_medium(values['image'])
+            return super(ExtendedLead, self).create(values)
+
+    @api.multi
+    @api.depends('image')
+    def _compute_image(self):
+        for r in self:
+            r.image_small = tools.image_resize_image_small(r.image)
+
+    @api.multi
     @api.constrains('expiration_date')
     def _check_expiration_date(self):
         for r in self:

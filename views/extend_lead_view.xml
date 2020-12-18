@@ -72,7 +72,7 @@
         <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
         <field name="arch" type="xml">
             <xpath expr="/kanban/templates/t/div/div[2]/div[1]" position="before">
-                <img t-att-src="kanban_image('crm.lead', 'image', record.id.raw_value)" width="34" height="34" style="margin-right:4px" class="oe_kanban_avatar pull-left"/>
+                <img t-att-src="kanban_image('crm.lead', 'image_small', record.id.raw_value)" width="34" height="34" style="margin-right:4px" class="oe_kanban_avatar pull-left"/>
             </xpath>
         </field>
     </record>
