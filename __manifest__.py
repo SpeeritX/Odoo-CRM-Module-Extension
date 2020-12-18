@@ -20,6 +20,7 @@
     # always loaded
     'data': [
         'views/extend_lead_view.xml',
+        'views/assets_backend_list_view.xml',
     ],
     'installable': True,
     'auto_install': False,

@@ -34,13 +34,13 @@ class ExtendedLead(models.Model):
     def create(self,values):
         if 'image' in values:
             values['image'] = tools.image_resize_image_medium(values['image'])
-            return super(ExtendedLead, self).create(values)
+        return super(ExtendedLead, self).create(values)
 
     @api.multi
     def write(self, values):
         if 'image' in values:
             values['image'] = tools.image_resize_image_medium(values['image'])
-            return super(ExtendedLead, self).create(values)
+        return super(ExtendedLead, self).write(values)
 
     @api.multi
     @api.depends('image')
