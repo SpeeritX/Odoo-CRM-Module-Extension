@@ -21,6 +21,7 @@ class ExtendedLead(models.Model):
     marketing_consent = fields.Boolean('Marketing Consent', index=True, default=True)
     obstacles = fields.One2many('extend_lead.obstacle', 'lead_id', string="Obstacles")
     difficulty = fields.Integer(compute="_calculate_difficulty", store=True, index=True, string='Difficulty')
+    image = fields.Binary('Image')
 
 
     @api.depends('obstacles')

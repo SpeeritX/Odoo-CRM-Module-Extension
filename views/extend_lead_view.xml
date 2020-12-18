@@ -5,11 +5,15 @@
         <field name="model">crm.lead</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="crm.view_create_opportunity_simplified"/>
+
         <field name="arch" type="xml">
+            <xpath expr="/form/sheet/group/group/field[@name='name']" position="before">
+                <field name="image" widget="image"/>
+            </xpath>
             <div class="o_row" position="after">
-                  <field name="expiration_date"/>
-                  <field name="additional_info"/>
-                  <field name="marketing_consent"/>
+                <field name="additional_info"/>
+                <field name="marketing_consent"/>
+                <field name="expiration_date"/>
             </div>
         </field>
     </record>
@@ -20,15 +24,21 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
         <field name="arch" type="xml">
-            <xpath expr="/form/sheet/group/group[4]" position="after">
+            <xpath expr="/form/sheet/group/group[1]" position="before">
                 <group>
-                  <field name="additional_info"/>
-                    <field name="marketing_consent"/>
+                    <field name="image" widget="image"/>
                 </group>
                 <group>
                   <field name="difficulty"/>
                   <field name="expiration_date"/>
                 </group>
+            </xpath>
+            <xpath expr="/form/sheet/group/group[6]" position="after">
+                <group>
+                    <field name="additional_info"/>
+                    <field name="marketing_consent"/>
+                </group>
+
                 <group>
                   <field name="obstacles" context="{'default_lead_id': active_id }">
                     <tree string="Obstacles">
@@ -52,6 +62,18 @@
                 <field name="difficulty"/>
                 <field name="expiration_date"/>
             </field>
+        </field>
+    </record>
+
+    <record id="crm_case_kanban_view_leads_extended" model="ir.ui.view">
+        <field name="name">Extended Lead</field>
+        <field name="model">crm.lead</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="/kanban/templates/t/div/div[2]/div[1]" position="before">
+                <img t-att-src="kanban_image('crm.lead', 'image', record.id.raw_value)" width="34" height="34" style="margin-right:4px" class="oe_kanban_avatar pull-left"/>
+            </xpath>
         </field>
     </record>
 </odoo>
